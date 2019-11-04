@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol_header: x-forwarded-proto
+    port-header: X-Forwarded-Port
+    use-relative-redirects: true
+
+spring :
+  #时间戳统一转换
+  jackson:
+    time-zone: GMT+8
+  dubbo:
+    # ApplicationConfig Bean
+    application:
+      id: websocket-provider
+      name: websocket-provider
+    # Base packages to scan Dubbo Components (e.g., @Service, @Reference)
+    scan:
+      base-packages: com.tgb.teambook.server
+    # ProtocolConfig Bean
+    protocol:
+      id: dubbo
+      name: dubbo
+      port: 20880
+    registry:
+      id: websocket-registry
+      address: N/A
