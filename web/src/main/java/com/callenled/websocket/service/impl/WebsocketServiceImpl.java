@@ -1,9 +1,9 @@
 package com.callenled.websocket.service.impl;
 
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.callenled.websocket.Websocket;
 import com.callenled.websocket.service.WebSocketService;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
  * @Author: callenled
  * @Date: 19-11-4 下午2:44
  */
-@Service(value = "websocketService")
+@Service(interfaceName = "websocketService", interfaceClass = WebSocketService.class, version = "1.0.0",timeout = 3000)
 public class WebsocketServiceImpl implements WebSocketService {
 
     private Websocket websocket = Websocket.getInstance();

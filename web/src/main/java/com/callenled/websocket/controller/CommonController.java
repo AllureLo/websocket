@@ -1,7 +1,7 @@
 package com.callenled.websocket.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.callenled.websocket.service.WebSocketService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import java.io.IOException;
 @RestController
 public class CommonController {
 
-    @Autowired
+    @Reference(url = "dubbo://127.0.0.1:20880")
     private WebSocketService webSocketService;
 
     @RequestMapping("/send")

@@ -13,16 +13,21 @@ spring :
   dubbo:
     # ApplicationConfig Bean
     application:
+      #应用名
       id: websocket-provider
       name: websocket-provider
     # Base packages to scan Dubbo Components (e.g., @Service, @Reference)
     scan:
-      base-packages: com.tgb.teambook.server
+      #扫描的包名
+      base-packages: com.callenled.websocket.service.impl
     # ProtocolConfig Bean
     protocol:
       id: dubbo
       name: dubbo
+      #dubbo服务暴露的端口
       port: 20880
     registry:
-      id: websocket-registry
+      #zookeeper地址
       address: N/A
+      #提供注册的端口
+      port: 2181

@@ -65,7 +65,7 @@ public class Websocket {
      */
     public void sendMessage(String id, String message) throws IOException {
         if (webSocketMap.containsKey(id)) {
-            log.info("向窗口: " + id + " 发送一条新的信息:" + message);
+            log.info("会话窗口: " + id + "，发送一条新的信息:" + message);
             webSocketMap.get(id).getBasicRemote().sendText(message);
         } else {
             log.error("推送失败，无法找到会话窗口:" + id);
