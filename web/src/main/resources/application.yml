@@ -28,6 +28,6 @@ spring :
       port: 20880
     registry:
       #zookeeper地址
-      address: N/A
+      address: localhost
       #提供注册的端口
       port: 2181
