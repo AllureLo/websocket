@@ -11,7 +11,7 @@ import java.io.IOException;
  * @Author: callenled
  * @Date: 19-11-4 下午2:44
  */
-@Service(interfaceName = "websocketService", interfaceClass = WebSocketService.class, version = "1.0.0",timeout = 3000)
+@Service(interfaceClass = WebSocketService.class, version = "1.0.0",timeout = 3000)
 public class WebsocketServiceImpl implements WebSocketService {
 
     private Websocket websocket = Websocket.getInstance();

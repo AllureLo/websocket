@@ -27,7 +27,7 @@ public class WebsocketServer {
      * @param id
      */
     @OnOpen
-    public void onOpen(Session session, @PathParam("id") String id) throws IOException {
+    public void onOpen(Session session, @PathParam("id") String id) {
         websocket.onOpen(id, session);
     }
 

@@ -42,14 +42,19 @@ public class Websocket {
      */
     private Map<String, Session> webSocketMap = new ConcurrentHashMap<>();
 
-    public void onOpen(String id, Session session) throws IOException {
+    public void onOpen(String id, Session session) {
         if (!webSocketMap.containsKey(id)) {
             webSocketMap.put(id, session);
             log.info("有新窗口开始监听:" + id + ",当前在线人数为" + onlineCount());
-            session.getBasicRemote().sendText("连接成功");
+            this.sendMessage(session, "连接成功");
         } else {
-            session.getBasicRemote().sendText("连接冲突，当前会话关闭");
-            session.close();
+            this.sendMessage(session, "连接冲突，当前会话关闭");
+            try {
+                session.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                log.error(e.getMessage());
+            }
         }
     }
 
@@ -60,13 +65,21 @@ public class Websocket {
         }
     }
 
+    private void sendMessage(Session session, String message) {
+        try {
+            session.getBasicRemote().sendText(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 实现服务器主动推送
      */
-    public void sendMessage(String id, String message) throws IOException {
+    public void sendMessage(String id, String message) {
         if (webSocketMap.containsKey(id)) {
             log.info("会话窗口: " + id + "，发送一条新的信息:" + message);
-            webSocketMap.get(id).getBasicRemote().sendText(message);
+            this.sendMessage(webSocketMap.get(id), message);
         } else {
             log.error("推送失败，无法找到会话窗口:" + id);
         }
