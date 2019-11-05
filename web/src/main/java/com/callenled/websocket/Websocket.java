@@ -49,12 +49,7 @@ public class Websocket {
             this.sendMessage(session, "连接成功");
         } else {
             this.sendMessage(session, "连接冲突，当前会话关闭");
-            try {
-                session.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
+            this.onClose(session);
         }
     }
 
@@ -62,6 +57,16 @@ public class Websocket {
         if (webSocketMap.containsKey(id) && webSocketMap.get(id) == session) {
             webSocketMap.remove(id);
             log.info("有一连接关闭:" + id + "！当前在线人数为" + onlineCount());
+            this.onClose(session);
+        }
+    }
+
+    private void onClose(Session session) {
+        try {
+            session.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
