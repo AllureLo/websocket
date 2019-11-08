@@ -20,8 +20,9 @@ public class CommonController {
 
     @RequestMapping("/send")
     public String send(@RequestParam(value = "id") String id,
+                       @RequestParam(value = "appName") String appName,
                        @RequestParam(value = "message") String message) throws IOException {
-        webSocketService.sendMessage(id, message);
+        webSocketService.sendMessage(id, appName, message);
         return "发送成功";
     }
 

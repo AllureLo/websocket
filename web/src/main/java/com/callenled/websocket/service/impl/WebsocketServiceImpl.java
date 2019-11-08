@@ -14,15 +14,13 @@ import java.io.IOException;
 @Service(interfaceClass = WebSocketService.class, version = "1.0.0",timeout = 3000)
 public class WebsocketServiceImpl implements WebSocketService {
 
-    private Websocket websocket = Websocket.getInstance();
-
     @Override
-    public void sendMessage(String id, String message) throws IOException {
-        websocket.sendMessage(id, message);
+    public void sendMessage(String id, String appName, String message) throws IOException {
+        Websocket.sendMessage(id, appName, message);
     }
 
     @Override
     public void onlineCount() {
-        websocket.onlineCount();
+        Websocket.onlineCount();
     }
 }
